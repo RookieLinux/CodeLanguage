@@ -1,0 +1,3 @@
+/home/rookie/CLionProjects/C_Pro/glibc_malloc/cmake-build-debug/CMakeFiles/glibc_malloc.dir
+/home/rookie/CLionProjects/C_Pro/glibc_malloc/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/rookie/CLionProjects/C_Pro/glibc_malloc/cmake-build-debug/CMakeFiles/rebuild_cache.dir

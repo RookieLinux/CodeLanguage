@@ -1,0 +1,11 @@
+# ninja log v5
+0	196	1676122029161587329	CMakeFiles/test_virtual_destructor.dir/main.cpp.o	627c50a4e108625d
+196	236	1676122029201585396	test_virtual_destructor	a90955af279560c9
+0	182	1676122076259434287	CMakeFiles/test_virtual_destructor.dir/main.cpp.o	627c50a4e108625d
+182	223	1676122076303432387	test_virtual_destructor	a90955af279560c9
+0	176	1676122300023676408	CMakeFiles/test_virtual_destructor.dir/main.cpp.o	627c50a4e108625d
+176	212	1676122300059675389	test_virtual_destructor	a90955af279560c9
+0	160	1676123404259042761	CMakeFiles/test_virtual_destructor.dir/main.cpp.o	627c50a4e108625d
+160	193	1676123404295043109	test_virtual_destructor	a90955af279560c9
+0	165	1676123750736706512	CMakeFiles/test_virtual_destructor.dir/main.cpp.o	627c50a4e108625d
+165	201	1676123750776706550	test_virtual_destructor	a90955af279560c9

@@ -1,0 +1,5 @@
+# ninja log v5
+0	19	1672629150622871593	CMakeFiles/test_posix_timer.dir/main.c.o	2311a8dd6da8ee75
+19	30	1672629150634871849	test_posix_timer	6900a56380a03b7a
+0	22	1672629281083972935	CMakeFiles/test_posix_timer.dir/main.c.o	2311a8dd6da8ee75
+22	32	1672629281099972895	test_posix_timer	6900a56380a03b7a
