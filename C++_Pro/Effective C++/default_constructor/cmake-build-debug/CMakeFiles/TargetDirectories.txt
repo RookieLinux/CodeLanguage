@@ -1,3 +1,0 @@
-/home/rookie/CLionProjects/C++_Pro/Effective C++/default_constructor/cmake-build-debug/CMakeFiles/default_constructor.dir
-/home/rookie/CLionProjects/C++_Pro/Effective C++/default_constructor/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/rookie/CLionProjects/C++_Pro/Effective C++/default_constructor/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,4 +1,4 @@
-# Install script for directory: /home/rookie/CLionProjects/C_Pro/glibc_malloc
+# Install script for directory: /home/rookie/CLionProjects/CodeLanguage/C_Pro/glibc_malloc
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/rookie/CLionProjects/C_Pro/glibc_malloc/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/rookie/CLionProjects/CodeLanguage/C_Pro/glibc_malloc/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -5,12 +5,15 @@ public:
     Base(){
         std::cout << "Base Constructor\n";
     }
-//    ~Base(){
-//        std::cout << "Base Destructor\n";
-//    }
+#if 0
+    ~Base(){
+        std::cout << "Base Destructor\n";
+    }
+#else
     virtual ~Base(){
         std::cout << "Base Destructor\n";
     }
+#endif
 };
 
 class Derived:public Base{

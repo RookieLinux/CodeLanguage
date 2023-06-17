@@ -34,7 +34,7 @@ int main() {
     std::cout << "1. pos.capacity()="<< pos.capacity()
               << " pos.size()="<< pos.size() << std::endl;
 //    pos.reserve(3); //设定空间大小
-//    std::cout << "2. pos.capacity()="<< pos.capacity()
+//    cout << "2. pos.capacity()="<< pos.capacity()
 //              << " pos.size()="<< pos.size() << std::endl;
 
 #if 1
@@ -48,6 +48,6 @@ int main() {
 #endif
     std::cout << "3. pos.capacity()="<< pos.capacity()
               << " pos.size()="<< pos.size() << std::endl;
-    std:cin.get();
+    cin.get();
     return 0;
 }

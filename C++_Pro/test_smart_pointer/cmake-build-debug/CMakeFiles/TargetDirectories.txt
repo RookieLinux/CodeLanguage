@@ -1,3 +1,0 @@
-/home/rookie/CLionProjects/test_smart_pointer/cmake-build-debug/CMakeFiles/test_smart_pointer.dir
-/home/rookie/CLionProjects/test_smart_pointer/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/rookie/CLionProjects/test_smart_pointer/cmake-build-debug/CMakeFiles/rebuild_cache.dir

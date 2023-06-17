@@ -1,4 +1,6 @@
 /* Per thread arena example. */
+
+#if 0
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -49,3 +51,29 @@ int main() {
     }
     return 0;
 }
+
+#else
+
+#include <sys/mount.h>
+#include <sys/statfs.h>
+#include <stdio.h>
+#include <string.h>
+#include <dirent.h>
+
+int main() {
+    struct statfs buf;
+//    const char* root_path = "/";  // 根文件系统路径
+    const char* root_path = "/";  // 根文件系统路径
+
+    if (statfs(root_path, &buf) != 0) {
+        perror("statfs");
+        return 1;
+    }
+
+    // 输出文件系统的总容量和可用容量
+    printf("Total space: %lld MB\n",buf.f_frsize * buf.f_blocks / (1024 * 1024ull));
+    printf("Available space: %lld MB\n",buf.f_frsize * buf.f_bfree / (1024 * 1024ull));
+    return 0;
+}
+
+#endif
