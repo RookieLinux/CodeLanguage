@@ -1,5 +1,0 @@
-# ninja log v5
-0	179	1672328898837971514	CMakeFiles/test_smart_pointer.dir/main.cpp.o	f54021db504934f4
-179	217	1672328898873971633	test_smart_pointer	10b805c25ab3f463
-1	205	1672330097779612312	CMakeFiles/test_smart_pointer.dir/main.cpp.o	f54021db504934f4
-205	242	1672330097815611903	test_smart_pointer	10b805c25ab3f463

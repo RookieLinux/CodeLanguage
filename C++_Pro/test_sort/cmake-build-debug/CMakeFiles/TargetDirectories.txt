@@ -1,3 +1,0 @@
-/home/rookie/CLionProjects/C++_Pro/test_sort/cmake-build-debug/CMakeFiles/test_sort.dir
-/home/rookie/CLionProjects/C++_Pro/test_sort/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/rookie/CLionProjects/C++_Pro/test_sort/cmake-build-debug/CMakeFiles/rebuild_cache.dir
