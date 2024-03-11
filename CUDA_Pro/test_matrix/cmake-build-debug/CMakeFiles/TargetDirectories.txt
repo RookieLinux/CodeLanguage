@@ -1,3 +1,0 @@
-/home/rookie/CLionProjects/CodeLanguage/CUDA_Pro/test_matrix/cmake-build-debug/CMakeFiles/test_matrix.dir
-/home/rookie/CLionProjects/CodeLanguage/CUDA_Pro/test_matrix/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/rookie/CLionProjects/CodeLanguage/CUDA_Pro/test_matrix/cmake-build-debug/CMakeFiles/rebuild_cache.dir

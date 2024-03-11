@@ -1,7 +1,0 @@
-# ninja log v5
-0	356	1709260096637387622	CMakeFiles/test_matrix.dir/main.cu.o	42a50c28d3ebd25d
-356	378	1709260096661391175	CMakeFiles/test_matrix.dir/cmake_device_link.o	622292707d58532
-378	405	1709260096685394728	test_matrix	1db126794fcc125b
-1	317	1709284892533008956	CMakeFiles/test_matrix.dir/main.cu.o	42a50c28d3ebd25d
-318	340	1709284892561003078	CMakeFiles/test_matrix.dir/cmake_device_link.o	622292707d58532
-340	366	1709284892584998039	test_matrix	1db126794fcc125b
