@@ -1,3 +1,0 @@
-/home/rookie/CLionProjects/CodeLanguage/C_Pro/test_posix_timer/cmake-build-debug/CMakeFiles/test_posix_timer.dir
-/home/rookie/CLionProjects/CodeLanguage/C_Pro/test_posix_timer/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/rookie/CLionProjects/CodeLanguage/C_Pro/test_posix_timer/cmake-build-debug/CMakeFiles/rebuild_cache.dir

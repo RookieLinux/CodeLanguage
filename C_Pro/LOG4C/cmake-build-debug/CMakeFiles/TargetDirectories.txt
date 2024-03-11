@@ -1,3 +1,0 @@
-/home/rookie/CLionProjects/CodeLanguage/C_Pro/LOG4C/cmake-build-debug/CMakeFiles/LOG4C.dir
-/home/rookie/CLionProjects/CodeLanguage/C_Pro/LOG4C/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/rookie/CLionProjects/CodeLanguage/C_Pro/LOG4C/cmake-build-debug/CMakeFiles/rebuild_cache.dir
