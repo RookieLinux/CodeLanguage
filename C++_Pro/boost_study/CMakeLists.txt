@@ -18,7 +18,7 @@ foreach(cppfile IN LISTS mains)
     # 获取对应文件名不包含路径与后缀
     get_filename_component(my_executable ${cppfile} NAME_WLE)
 
-    if(DCMAKE_BUILD_TYPE STREQUAL "Release") # Release模式
+    if(CMAKE_BUILD_TYPE STREQUAL "Release") # Release模式
         set(my_executable_release ${my_executable}_release)
         add_executable(${my_executable_release} ${cppfile})
     else ()                                  # Debug模式
@@ -32,7 +32,7 @@ foreach(cppfile IN LISTS mains)
     if(Boost_FOUND)
         message(STATUS "Boost found")
         include_directories(${Boost_INCLUDE_DIRS})
-        if(DCMAKE_BUILD_TYPE STREQUAL "Release") # Release模式
+        if(CMAKE_BUILD_TYPE STREQUAL "Release") # Release模式
             target_link_libraries(${my_executable_release}  ${Boost_LIBRARIES})
         else ()                                  # Debug模式
             target_link_libraries(${my_executable_debug}  ${Boost_LIBRARIES})
