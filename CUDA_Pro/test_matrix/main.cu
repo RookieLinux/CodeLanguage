@@ -1,7 +1,57 @@
-#include <cuda_runtime.h>
 #include <stdio.h>
+#include <time.h>
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <sys/time.h>
+#endif
+
 #include "cudastart.h"
 
+
+double cpuSecond()
+{
+    struct timeval tp;
+    gettimeofday(&tp,NULL);
+    return((double)tp.tv_sec+(double)tp.tv_usec*1e-6);
+
+}
+
+void initialData(float* ip,int size)
+{
+    time_t t;
+    srand((unsigned )time(&t));
+    for(int i=0;i<size;i++)
+    {
+        ip[i]=(float)(rand()&0xffff)/1000.0f;
+    }
+}
+
+void initDevice(int devNum)
+{
+    int dev = devNum;
+    cudaDeviceProp deviceProp;
+    CHECK(cudaGetDeviceProperties(&deviceProp,dev));
+    printf("Using device %d: %s\n",dev,deviceProp.name);
+    printf("warpSize: %d\n", deviceProp.warpSize);
+    CHECK(cudaSetDevice(dev));
+
+}
+
+void checkResult(float * hostRef,float * gpuRef,const int N)
+{
+    double epsilon=1.0E-8;
+    for(int i=0;i<N;i++)
+    {
+        if(abs(hostRef[i]-gpuRef[i])>epsilon)
+        {
+            printf("Results don\'t match!\n");
+            printf("%f(hostRef[%d] )!= %f(gpuRef[%d])\n",hostRef[i],i,gpuRef[i],i);
+            return;
+        }
+    }
+    printf("Check result success!\n");
+}
 
 //CPU对照组，用于对比加速比
 void sumMatrix2DonCPU(float * MatA,float * MatB,float * MatC,int nx,int ny)
@@ -82,8 +132,10 @@ int main(int argc,char** argv)
 
     //测试GPU执行时间
     double gpuStart = cpuSecond();
+    printf("before sumMatrix\n");
     //将核函数放在线程网格中执行 (在调用内核函数的时候，会在<<< >>>内设置两个参数，分别代表线程网格的维度和线程块的维度。)
     sumMatrix<<<grid,block>>>(A_dev, B_dev, C_dev, nx, ny);
+    printf("after sumMatrix\n");
     CHECK(cudaDeviceSynchronize());
     double gpuTime = cpuSecond() - gpuStart;
     printf("GPU Execution Time: %f sec\n", gpuTime);

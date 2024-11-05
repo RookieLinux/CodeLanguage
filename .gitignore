@@ -15,3 +15,4 @@ _deps
 *.cbp
 cmake-build-debug
 cmake-build-release
+CUDA_Pro/Work
