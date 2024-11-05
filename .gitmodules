@@ -11,3 +11,6 @@
 [submodule "CUDA_Pro/other_example/CUDA-code"]
 	path = CUDA_Pro/other_example/CUDA-code
 	url = git@github.com:sangyc10/CUDA-code.git
+[submodule "C++_Pro/STLSourceCodeNote"]
+	path = C++_Pro/STLSourceCodeNote
+	url = git@github.com:SilverMaple/STLSourceCodeNote.git
