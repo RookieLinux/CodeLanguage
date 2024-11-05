@@ -1,0 +1,10 @@
+[submodule "CUDA_Pro/official_example/cuda-samples"]
+	path = CUDA_Pro/official_example/cuda-samples
+	url = git@github.com:RookieLinux/cuda-samples.git
+[submodule "CUDA_Pro/other_example/cuda_by_example"]
+	path = CUDA_Pro/other_example/cuda_by_example
+	url = git@github.com:Yannnnnnnnnnnn/cuda_by_example.git
+[submodule "CUDA_Pro/other_example/opencv"]
+	path = CUDA_Pro/other_example/opencv
+	url = git@github.com:opencv/opencv.git
+	branch = 4.5.5
