@@ -4,6 +4,11 @@
 
 using namespace std;
 
+struct MyStruct {
+    int i = 0;
+    std::string s;
+};
+
 std::tuple<int, int> return_multiple_values()
 {
     return std::make_tuple(11, 7);
@@ -45,5 +50,17 @@ int main() {
     //结构化绑定的别名还有一个限制：无法在同一个作用域中重复使用。这一点和变量声明是一样的，比如：
     //auto[ax1, by1] = bt1; //编译报错
 
+    std::cout <<"------------------" << '\n';
+    MyStruct ms = {42, "Jim" };
+    auto&& [v1, n1] = std::move(ms);//匿名实体是ms的右值引用
+    std::cout <<"1. "<< "ms.s: " << ms.s << '\n';
+    auto [v, n] = std::move(ms);
+    std::cout <<"2. "<< "ms.s: " << ms.s << '\n';
+    std::cout << "n: " << n << '\n';
+    std::string s = std::move(n);
+    n = "Lara";
+    std::cout << "ms.s: " << ms.s << '\n';
+    std::cout << "n:" << n << '\n';
+    std::cout << "s:" << s << '\n';
     return 0;
 }
