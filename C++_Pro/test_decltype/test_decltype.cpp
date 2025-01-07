@@ -1,6 +1,10 @@
 #include <iostream>
 #include <type_traits> // 存在is_rvalue_reference、is_lvalue_reference、is_reference模板
 
+struct A {
+    double x;
+};
+
 template<class T>
 T sum1(T a1, T a2)
 {
@@ -69,14 +73,15 @@ int main() {
     decltype("hello world") jjj = "hello world";
 
 //    6. 通常情况下，decltype(e)所推导的类型会同步e的cv限定符，但是还有其他情况，当e是未加括号的成员变量时，父对象表达式的cv限定符会被忽略，不能同步到推导结果：
-    const int ia = 0;
-    decltype(ia); // decltype(i)推导类型为const int
-    struct A {
-        double x;
-    };
-    const A* aa = new A();
-    decltype(aa->x);// decltype(a->x)推导类型为double, const属性被忽略
-    decltype((aa->x)); //规则6
-
+    const int ia = 1;
+//    decltype(ia); // decltype(i)推导类型为const int
+    const A* pa = new A();
+//    decltype(pa->x);// decltype(pa->x)推导类型为double, const属性被忽略
+//    decltype((pa->x)); //规则6
+    if(pa)
+    {
+        delete pa;
+        pa = nullptr;
+    }
     return 0;
 }

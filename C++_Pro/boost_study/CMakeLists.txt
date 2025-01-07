@@ -1,8 +1,7 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.22)
 project(boost_study)
 
 set(CMAKE_CXX_STANDARD 14)
-
 # 设置编译器优化等级为O3
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 

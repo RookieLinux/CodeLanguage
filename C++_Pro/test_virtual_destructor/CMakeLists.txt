@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.22)
 project(test_virtual_destructor)
 
 set(CMAKE_CXX_STANDARD 11)
