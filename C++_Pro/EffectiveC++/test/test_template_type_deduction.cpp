@@ -22,22 +22,32 @@
 */
 
 #include <iostream>
+#include <boost/type_index.hpp>
 using namespace std;
+using boost::typeindex::type_id_with_cvr;
 
 template<typename T>
-void f1(T & param)
+void f1(T& param)
 {
-
+    std::cout << "Type of T: " << type_id_with_cvr<T>().pretty_name() << ";";
+    std::cout << " Type of param: " << type_id_with_cvr<decltype(param)>().pretty_name()<<";\n";
 }
 
 template<typename T>
 void f2(T&& param)
 {
-
+    std::cout << "Type of T: " << type_id_with_cvr<T>().pretty_name() << ";";
+    std::cout << " Type of param: " << type_id_with_cvr<decltype(param)>().pretty_name()<<";\n";
 }
 
 template<typename T>
 void f3(T param)
+{
+    std::cout << "Type of T: " << type_id_with_cvr<T>().pretty_name() << ";";
+    std::cout << " Type of param: " << type_id_with_cvr<decltype(param)>().pretty_name()<<";\n";
+}
+
+void someFunc(int, double)
 {
 
 }
@@ -45,6 +55,7 @@ void f3(T param)
 int main()
 {
     /* 情况一 */
+    std::cout << "   situation 1" << "\n";
     int x1=27;
     const int cx1=x1;
     const int & rx1=cx1;
@@ -53,6 +64,7 @@ int main()
     f1(rx1);  //T是const int; param是const int&
 
     /* 情况二 */
+    std::cout << "   situation 2" << "\n";
     int x2=27;
     const int cx2=x2;
     const int & rx2=cx2;
@@ -62,6 +74,7 @@ int main()
     f2(27);   //T是int; param是int&&
 
     /* 情况三 */
+    std::cout << "   situation 3" << "\n";
     int x3=27;
     const int cx3=x2;
     const int & rx3=cx2;
@@ -69,6 +82,20 @@ int main()
     f3(cx2);  //T是int; param是int
     f3(rx2);  //T是int; param是int
 
+    /*
+     * 数组实参
+    */
+    std::cout << "   array parameter" << "\n";
+    const char name[] = "J. P. Briggs";
+    f1(name); //不会退化 完整的类型
+    f3(name); //退化为指针
+
+    /*
+     * 函数实参
+    */
+    std::cout << "   function parameter" << "\n";
+    f1(someFunc);     //不会退化 完整的类型
+    f3(someFunc); //退化为函数指针
     return 0;
 }
 
