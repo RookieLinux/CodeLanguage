@@ -21,15 +21,26 @@
  *    b. 如果忽略引⽤之后expr是⼀个const，那就再忽略const。如果它是volatile，也会被忽略
 */
 
+#include <iostream>
+using namespace std;
 
 template<typename T>
-void f1(T & param);
+void f1(T & param)
+{
+
+}
 
 template<typename T>
-void f2(T&& param);
+void f2(T&& param)
+{
+
+}
 
 template<typename T>
-void f3(T param);
+void f3(T param)
+{
+
+}
 
 int main()
 {
