@@ -33,7 +33,7 @@ public:
     }
 
 #if 1
-    X1(const X1&&) {
+    X1(const X1&&)  noexcept {
         num1++;
         std::cout << "Call X1(const x1&&)" << std::endl;
     }
@@ -64,6 +64,13 @@ MyType return_name_value(bool test) {
 }
 
 int main() {
+    /*
+        简单来讲：
+        • 所有名称都是 lvalue(左值)。
+        • 所有用作表达式的字符串字面量是 lvalue(左值)。
+        • 所有其他的字面量（4.2, true, nullptr）是 prvalue(纯右值)。
+        • 所有临时对象（尤其是以值返回的对象）是 prvalue(纯右值)。
+    */
     /* 纯右值参数复制构造 */
     X x1(42);     //直接调用构造函数初始化
     X x2 = X(42); //C++17中，同类型纯右值复制构造,复制省略，直接在x2位置上进行构造
