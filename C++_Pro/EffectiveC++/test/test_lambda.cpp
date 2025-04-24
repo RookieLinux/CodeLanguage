@@ -29,12 +29,102 @@
  *      auto foo = [&x, &y] { return x * y; };
  *   }
  *
+ *   当lambda表达式捕获值时，表达式内实际获得的是捕获变量的复制，我们可以任意地修改内部捕获变量，但不会影响外部变量。
+ *   进一步审视x值的变化会发现另一个有趣的事实，虽然在lambda表达式内修改x不会影响外部x的值，但是它却能影响下次调用lambda表达式时x的值。
+ *   #include <iostream>
+ *   int main()
+ *   {
+ *       int x = 5, y = 8;
+ *       auto foo = [x, &y]() mutable {
+ *           x += 1;
+ *           y += 2;
+ *           std::cout << "lambda x = " << x << ", y = " << y <<
+ *           std::endl;
+ *           return x * y;
+ *       };
+ *       foo();
+ *       std::cout << "call1 x = " << x << ", y = " << y << std::endl;
+ *       foo();
+ *       std::cout << "call2 x = " << x << ", y = " << y << std::endl;
+ *   }
+ *   结果：
+ *   lambda x = 6, y = 10
+ *   call1 x = 5, y = 10
+ *   lambda x = 7, y = 12
+ *   call2 x = 5, y = 12
+ *
+ *   对于捕获值的lambda表达式还有一点需要注意，捕获值的变量在lambda表达式定义的时候已经固定下来了，
+ *   无论函数在lambda表达式定义后如何修改外部变量的值，lambda表达式捕获的值都不会变化，例如
+ *   #include <iostream>
+ *   int main()
+ *   {
+ *       int x = 5, y = 8;
+ *       auto foo = [x, &y]() mutable {
+ *           x += 1;
+ *           y += 2;
+ *           std::cout << "lambda x = " << x << ", y = " << y <<
+ *           std::endl;
+ *           return x * y;
+ *       };
+ *       x = 9;
+ *       y = 20;
+ *       foo();
+ *   }
+ *
+ *   结果：
+ *   lambda x = 6, y = 22
+ *
+ *   -----特殊捕获-----
+ *   1．[this] —— 捕获this指针，捕获this指针可以让我们使用this类型的成员变量和函数。
+ *   2．[=] —— 捕获lambda表达式定义作用域的全部变量的值，包括this。
+ *   3．[&] —— 捕获lambda表达式定义作用域的全部变量的引用，包括this。
+ *
  *   -----无状态lambda表达式-----
+ *   void f1(void(*)()) {}
+ *   void g1() { f1([] {}); }
+ *   void f2(void(&)()) {}
+ *   void g2() { f2(*[] {}); }
  *
  *   -----广义捕获-----
  *   C++14标准中定义了广义捕获，所谓广义捕获实际上是两种捕获方式，第一种称为简单捕获，这种捕获就是我们在前文中提到的捕获方法，即[identifier]、[&identifier]以及[this]等。
  *   第二种叫作初始化捕获，这种捕获方式是在C++14标准中引入的，它解决了简单捕获的一个重要问题，即只能捕获lambda表达式定义上下文的变量，而无法捕获表达式结果以及自定义捕获变量名，比如：
+ *   int main()
+ *   {
+ *      int x = 5;
+ *      auto foo = [r = x + 1]{ return r; };
+ *   }
  *
+ *   -----泛型lambda表达式-----
+ *   C++14标准让lambda表达式具备了模版函数的能力，我们只需要使用auto占位符即可，例如：
+ *   int main()
+ *   {
+ *      auto foo = [](auto a) { return a; };
+ *      int three = foo(3);
+ *      char const* hello = foo("hello");
+ *   }
+ *
+ *   -----常量表达式及捕获*this-----
+ *   从C++17开始，lambda表达式在条件允许的情况下都会隐式声明为constexpr。
+ *   constexpr int foo()
+ *   {
+ *       return []() { return 58; }();
+ *   }
+ *   auto get_size = [](int i) { return i * 2; };
+ *   char buffer1[foo()] = { 0 };
+ *   char buffer2[get_size(5)] = { 0 };
+ *
+ *   C++17在捕获列表中直接添加[*this]，[*this]的语法让程序生成了一个*this对象的副本并存储在lambda表达式内，
+ *   可以在lambda表达式内直接访问这个复制对象的成员，还是以前面的Work类为例：
+ *   class Work
+ *   {
+ *      private:int value;
+ *      public:
+ *      Work() : value(42) {}
+ *      std::future<int> spawn()
+ *      {
+ *          return std::async([=, *this]() -> int { return value; });
+ *      }
+ *   };
 */
 #include <iostream>
 #include <vector>

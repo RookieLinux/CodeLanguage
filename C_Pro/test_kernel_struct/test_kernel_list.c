@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "list.h"
+#include "test_kernel_list.h"
 
 typedef struct worker {
     struct list_head list;
