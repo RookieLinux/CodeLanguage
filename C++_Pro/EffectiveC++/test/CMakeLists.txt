@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(test_constructor)
+project(test)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -24,20 +24,5 @@ foreach(cppfile IN LISTS mains)
     else ()                                  # Debug模式
         set(my_executable_debug ${my_executable}_debug)
         add_executable(${my_executable_debug} ${cppfile})
-    endif()
-    # 链接时需要加上的库
-    # 查找Boost库，指定所需的组件（这里是thread）
-    find_package(Boost REQUIRED COMPONENTS thread)
-    # 如果找到Boost库，设置包含目录和链接库
-    if(Boost_FOUND)
-        message(STATUS "Boost found")
-        include_directories(${Boost_INCLUDE_DIRS})
-        if(DCMAKE_BUILD_TYPE STREQUAL "Release") # Release模式
-            target_link_libraries(${my_executable_release}  ${Boost_LIBRARIES})
-        else ()                                  # Debug模式
-            target_link_libraries(${my_executable_debug}  ${Boost_LIBRARIES})
-        endif()
-    else ()
-        message(FATAL_ERROR "Boost not found")
     endif()
 endforeach()

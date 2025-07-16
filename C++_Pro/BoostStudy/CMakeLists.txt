@@ -25,18 +25,24 @@ foreach(cppfile IN LISTS mains)
         add_executable(${my_executable_debug} ${cppfile})
     endif()
     # 链接时需要加上的库
-    # 查找Boost库，指定所需的组件（这里是thread）
-    find_package(Boost REQUIRED COMPONENTS thread)
-    # 如果找到Boost库，设置包含目录和链接库
-    if(Boost_FOUND)
-        message(STATUS "Boost found")
-        include_directories(${Boost_INCLUDE_DIRS})
-        if(CMAKE_BUILD_TYPE STREQUAL "Release") # Release模式
-            target_link_libraries(${my_executable_release}  ${Boost_LIBRARIES})
-        else ()                                  # Debug模式
-            target_link_libraries(${my_executable_debug}  ${Boost_LIBRARIES})
+    # Modern CMake: try to use BoostConfig.cmake if available
+    set(Boost_USE_STATIC_LIBS        OFF)
+    set(Boost_USE_MULTITHREADED      ON)
+    set(Boost_USE_STATIC_RUNTIME     OFF)
+
+    # 兼容旧的 FindBoost（CMake 3.28 之前的行为），新版本可查找Config模块
+    if(NOT TARGET Boost::thread)
+        find_package(Boost CONFIG REQUIRED)
+        if(Boost_FOUND)
+            message(STATUS "Boost found")
+            include_directories(${Boost_INCLUDE_DIRS})
+            if(CMAKE_BUILD_TYPE STREQUAL "Release") # Release模式
+                target_link_libraries(${my_executable_release}  ${Boost_LIBRARIES})
+            else ()                                  # Debug模式
+                target_link_libraries(${my_executable_debug}  ${Boost_LIBRARIES})
+            endif()
+        else ()
+            message(FATAL_ERROR "Boost not found")
         endif()
-    else ()
-        message(FATAL_ERROR "Boost not found")
-    endif()
+    endif ()
 endforeach()
