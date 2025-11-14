@@ -3,6 +3,10 @@ cmake_minimum_required(VERSION 3.16)
 project(QML_EXAMPLES VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_PREFIX_PATH "/opt/Qt/Qt6.6.2/6.6.2/gcc_64/")
 
+find_package(Qt6 COMPONENTS Quick Qml Gui Core REQUIRED)
+#`NEW` 将使用 `:/qt/qml/` 作为QML资源的默认前缀。如果你需要兼容Qt5的行为，可改为 `OLD`
+qt_policy(SET QTP0001 NEW)
+
 add_subdirectory(1.Introduction)
 add_subdirectory(2.DissectingQmlSyntax)
 add_subdirectory(3.BasicElements)
@@ -17,3 +21,4 @@ add_subdirectory(11-ModelViewArchitecture)
 add_subdirectory(12-TransformsTransitionsAnimations)
 add_subdirectory(13-Networking)
 add_subdirectory(14-Storage)
+add_subdirectory(15-MyQCustomPlotExample)
