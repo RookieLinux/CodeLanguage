@@ -8,7 +8,7 @@
 class QCPGrid;
 class QCustomPlot;
 
-namespace QmlRealtimePlotNameSpace
+namespace QmlQCustomPlot
 {
 
 class Grid : public QObject

@@ -5,7 +5,7 @@
 
 #include <stdexcept>
 
-namespace QmlRealtimePlotNameSpace
+namespace QmlQCustomPlot
 {
 
 Axis::Axis(QObject *parent) :  QObject(parent)
@@ -22,7 +22,7 @@ Axis::Axis(QCPAxis* axis, QCustomPlot *parentPlot, QObject *parent)
     connect(parentPlot, &QCustomPlot::beforeReplot, this, &Axis::updateProperty);
     connect(axis, &QCPAxis::destroyed, this, &Axis::deleteLater);
     m_ticker = new Ticker(axis, m_parentPlot, this);
-    m_grider = new Grid(axis->grid(), m_parentPlot, this);
+    m_grid = new Grid(axis->grid(), m_parentPlot, this);
     updateProperty();
 }
 
@@ -63,12 +63,13 @@ void Axis::setTickerType(TickerType type)
 void Axis::setRange(float position, float size, Qt::AlignmentFlag align) noexcept
 {
     m_axis->setRange(position, size, align);
-    m_parentPlot->replot();
+    // m_parentPlot->replot();
 }
 
 Q_INVOKABLE void Axis::setRange(float lower, float upper) noexcept
 {
     m_axis->setRange(lower, upper);
+    // m_parentPlot->replot();
 }
 
 void Axis::setTicker(QSharedPointer<QCPAxisTicker> ticker) noexcept

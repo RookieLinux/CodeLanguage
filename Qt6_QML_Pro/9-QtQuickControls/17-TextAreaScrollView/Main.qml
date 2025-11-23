@@ -18,7 +18,7 @@ Window {
             text: "TextArea is a multi-line text editor."
         }
 
-        ScrollView{
+        ScrollView{ //提供滚动功能的容器，当内容超出显示区域时会自动显示滚动条
             id: scrollViewId
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
@@ -27,7 +27,7 @@ Window {
                 id: textAreaId
                 font.pointSize: 15
                 wrapMode: TextArea.WordWrap
-                placeholderText: "Type in some text"
+                placeholderText: "Type in some text" //当输入框为空时显示的占位符文本
             }
         }
 

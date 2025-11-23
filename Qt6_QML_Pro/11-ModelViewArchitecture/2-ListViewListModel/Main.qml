@@ -11,7 +11,7 @@ Window {
         anchors.fill: parent
         model: modelId
         //delegate: delegateId
-        delegate:         Rectangle{
+        delegate: Rectangle{
             id: rectangleId
             width: parent.width
             height: 50

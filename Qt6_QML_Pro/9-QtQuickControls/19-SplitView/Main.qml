@@ -22,7 +22,7 @@ Window {
         }
         Rectangle{
             id: rect2Id
-            SplitView.preferredWidth: 100
+            SplitView.preferredWidth: 100 //首选宽度
             SplitView.minimumWidth: 50
             color: "lightgray"
             Text{

@@ -16,7 +16,8 @@ Window {
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: function(){
                 //Respond when the button is clicked.
-                progressBarId1.value = 75
+                //progressBarId1.value = 75
+                dialId.value = 75
             }
         }
 
@@ -46,7 +47,7 @@ Window {
 
         ProgressBar{
             id: progressBarId1
-            //value: 40
+            // value: 40
             indeterminate: true
             from: 1
             to: 100

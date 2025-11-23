@@ -4,7 +4,7 @@
 #include <QPen>
 #include <stdexcept>
 
-namespace QmlRealtimePlotNameSpace
+namespace QmlQCustomPlot
 {
 
 Ticker::Ticker(QCPAxis* parentAxis, QCustomPlot *parentPlot, QObject *parent)

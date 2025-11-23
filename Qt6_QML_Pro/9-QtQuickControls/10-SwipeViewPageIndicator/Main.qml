@@ -41,7 +41,7 @@ Window {
 
         //PageIndicator specific properties
         currentIndex: swipeViewId.currentIndex
-        interactive: true
+        interactive: true //点点可以切换页面
         count: swipeViewId.count
     }
 

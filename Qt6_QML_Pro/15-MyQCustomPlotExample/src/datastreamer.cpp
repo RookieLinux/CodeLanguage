@@ -13,9 +13,8 @@ DataStreamer::DataStreamer(QObject *parent) : QObject(parent) {}
 void DataStreamer::startGenerating()
 {
     m_running = true;
-    const int totalStreamSeconds = 3600; // 示例（长时间）
-    const int sampleRate = 24000; // 24k samples/s 假设（可调）
-    const int batchSize = 1200; // 每次发送的点数
+    const int sampleRate = 20000; // 10k samples/s 假设（可调）
+    const int batchSize = 20000; // 每次发送的点数
     double t = 0;
     const double dt = 1.0 / sampleRate;
 
@@ -29,9 +28,11 @@ void DataStreamer::startGenerating()
             ys.append(v);
             t += dt;
         }
+        if (t >= 1.02) t = 0;
         emit batchReady(xs, ys);
         // 控制发送速率：假设 batchSize/samplerate 秒
-        QThread::msleep(qMax(1, int(1000.0 * batchSize / sampleRate)));
+        QThread::msleep(qMax(1, int(10.0*batchSize / sampleRate)));
+        // qDebug("generate data");
     }
 }
 

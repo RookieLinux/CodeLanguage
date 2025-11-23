@@ -33,15 +33,16 @@ Window {
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
                 text: "First name: "
+                color: "black"
             }
 
 
-            TextField{
+            TextField{ //继承自TextInput
                 id: textFieldId
                 width: 200
                 height: 50
                 placeholderText: "Type in your name"
-                onEditingFinished: function(){
+                onEditingFinished: function(){ //继承自TextInput的信号
                     console.log("Current text: " + text)
                 }
             }

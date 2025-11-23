@@ -33,7 +33,7 @@ Window {
                 }
             }
 
-            onActivated: function(){
+            onActivated: function(){ // 100%进度触发
                 console.log("Button actiaved")
                 activated = true
             }

@@ -33,7 +33,7 @@ Window {
         //Editable ComboBox
         Label {
             text: "Editable Combo"
-            wrapMode: Label.Wrap
+            wrapMode: Label.Wrap //自动换行
             Layout.fillWidth: true
         }
 
@@ -61,12 +61,12 @@ Window {
                 }
             }
 
-            onActivated: function(){
-                  console.log("[" + currentIndex + "] " + currentText + " is activated")
+            onActivated: function(){ //确认编辑 -- 当用户从下拉列表中选择一个选项（激活条目）时触发
+                console.log("[" + currentIndex + "] " + currentText + " is activated")
             }
 
 
-            onAccepted: function(){
+            onAccepted: function(){ //激活输入选项 -- ComboBox处于editable:true时，当用户在编辑框里输入内容并按下Enter/Return（或等效的确认动作）时触发
                 if(find(editText) === -1){
                     model.append({ text: editText, location: "US", favorite_food: "Apple"})
                 }

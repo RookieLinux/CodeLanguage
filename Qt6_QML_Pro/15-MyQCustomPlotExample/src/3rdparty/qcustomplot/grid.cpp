@@ -4,7 +4,7 @@
 #include <QPen>
 #include <stdexcept>
 
-namespace QmlRealtimePlotNameSpace
+namespace QmlQCustomPlot
 {
 
 Grid::Grid(QCPGrid* grid, QCustomPlot *parentPlot, QObject *parent)

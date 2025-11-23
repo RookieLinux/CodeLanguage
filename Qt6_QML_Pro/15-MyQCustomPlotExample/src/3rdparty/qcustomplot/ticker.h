@@ -8,7 +8,7 @@
 class QCPAxis;
 class QCustomPlot;
 
-namespace QmlRealtimePlotNameSpace
+namespace QmlQCustomPlot
 {
 
 class Ticker : public QObject

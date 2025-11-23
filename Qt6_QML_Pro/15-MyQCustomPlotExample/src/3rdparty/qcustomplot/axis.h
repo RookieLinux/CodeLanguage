@@ -11,7 +11,7 @@ class QCPAxisTicker;
 class QCustomPlot;
 
 
-namespace QmlRealtimePlotNameSpace
+namespace QmlQCustomPlot
 {
 
 class Grid;
@@ -23,8 +23,8 @@ class Axis : public QObject
     QML_READ_WRITE_NOTIFY_PROPERTY(QString , label)
     QML_READ_WRITE_NOTIFY_PROPERTY(float , upper)
     QML_READ_WRITE_NOTIFY_PROPERTY(float , lower)
-    QML_READ_CONSTANT(QmlRealtimePlotNameSpace::Grid*,  grider)
-    QML_READ_CONSTANT(QmlRealtimePlotNameSpace::Ticker*,  ticker)
+    QML_READ_CONSTANT(QmlQCustomPlot::Grid*,  grid)
+    QML_READ_CONSTANT(QmlQCustomPlot::Ticker*,  ticker)
     QML_ELEMENT
     QML_UNCREATABLE("")
 public:

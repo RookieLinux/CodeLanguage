@@ -12,6 +12,7 @@ Window {
         width: parent.width
         height: parent.height
         contentHeight: mColumnId.implicitHeight
+        // contentHeight: mColumnId.height
 
         Column{
             id: mColumnId

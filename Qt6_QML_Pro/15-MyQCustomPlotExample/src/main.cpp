@@ -2,18 +2,22 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QThread>
-#include "qmlrealtimeplot.h"
+#include "3rdparty/qcustomplot/realtimeplot.h"
 #include "datastreamer.h"
+
+using namespace QmlQCustomPlot;
 
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
-
-    qmlRegisterType<QmlRealtimePlotNameSpace::QmlRealtimePlot>("RealtimePlot", 1, 0, "RealtimePlot");
+    qmlRegisterType<RealTimePlot>("RealtimeCustomPlotDemo", 1, 0, "RealTimePlot");
 
     QQmlApplicationEngine engine;
-    engine.load(QUrl("qml/main.qml"));
-    if (engine.rootObjects().isEmpty()) return -1;
+    const QUrl url(u"qrc:/qml/main.qml"_qs);
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
+                     &app, []() { QCoreApplication::exit(-1); },
+                Qt::QueuedConnection);
+    engine.load(url);
 
     // 启动后台数据线程
     QThread *workerThread = new QThread;
@@ -26,12 +30,10 @@ int main(int argc, char **argv)
     if (!plotObj) {
         qWarning() << "Couldn't find realtimePlot object in QML";
     } else {
+        qDebug() << "Found object in QML, name is"<< plotObj->objectName();
         // 连接 streamer.batchReady -> plot.appendBatch（QueuedConnection 保证在主线程）
-        QObject::connect(streamer, &DataStreamer::batchReady, plotObj, [plotObj](const QVector<double> &x, const QVector<double> &y){
-            // 调用 QML 对象的 appendBatch 槽
-            QMetaObject::invokeMethod(plotObj, "appendBatch", Qt::QueuedConnection,
-                                      Q_ARG(QVector<double>, x), Q_ARG(QVector<double>, y));
-        });
+        QObject::connect(streamer, &DataStreamer::batchReady,
+            qobject_cast<RealTimePlot*>(plotObj), &RealTimePlot::appendBatch,Qt::UniqueConnection);
     }
 
     QObject::connect(workerThread, &QThread::started, streamer, &DataStreamer::startGenerating);
