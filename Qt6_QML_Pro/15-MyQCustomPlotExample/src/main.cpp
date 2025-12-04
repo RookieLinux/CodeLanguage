@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QThread>
-#include "3rdparty/qcustomplot/realtimeplot.h"
+#include "3rdparty/qcustomplot/RealTimePlot.h"
 #include "datastreamer.h"
 
 using namespace QmlQCustomPlot;

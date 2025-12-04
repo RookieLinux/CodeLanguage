@@ -109,14 +109,6 @@ namespace QmlQCustomPlot
             }
         }
     }
-    QVariantMap BasePlot::graphs() const
-    {
-        QVariantMap map;
-        for(auto it = m_graphs.begin(); it != m_graphs.end(); ++it) {
-            map.insert(it.key(), QVariant::fromValue(it.value()));
-        }
-        return map;
-    }
 
     Q_INVOKABLE void BasePlot::addGraph(const QString &key)
     {
@@ -192,6 +184,42 @@ namespace QmlQCustomPlot
         m_customPlot->yAxis->setRange(m_initialYRange);
         m_customPlot->replot(QCustomPlot::rpQueuedReplot);
     }
+    Q_INVOKABLE void BasePlot::setRangeByPixels(double x1, double y1, double x2, double y2)
+    {
+        QCustomPlot *plot = customPlot();
+        if (!plot) return;
+
+        QCPAxis *xAxis = plot->xAxis;
+        QCPAxis *yAxis = plot->yAxis;
+        if (!xAxis || !yAxis) return;
+
+        double dataX1 = xAxis->pixelToCoord(x1);
+        double dataX2 = xAxis->pixelToCoord(x2);
+        double dataY1 = yAxis->pixelToCoord(y1);
+        double dataY2 = yAxis->pixelToCoord(y2);
+
+        double xMin = qMin(dataX1, dataX2);
+        double xMax = qMax(dataX1, dataX2);
+        double yMin = qMin(dataY1, dataY2);
+        double yMax = qMax(dataY1, dataY2);
+
+        const double minRange = 1e-10;
+        if (xMax - xMin < minRange || yMax - yMin < minRange) {
+            return;
+        }
+        xAxis->setRange(xMin, xMax);
+        yAxis->setRange(yMin, yMax);
+        plot->replot(QCustomPlot::rpQueuedReplot);
+    }
+
+    QVariantMap BasePlot::graphs() const
+    {
+        QVariantMap map;
+        for(auto it = m_graphs.begin(); it != m_graphs.end(); ++it) {
+            map.insert(it.key(), QVariant::fromValue(it.value()));
+        }
+        return map;
+    }
 
     Graph *BasePlot::getGraph(const QString &key) const
     {
@@ -252,12 +280,36 @@ namespace QmlQCustomPlot
 
     void BasePlot::zoomAxisToPoint(QCPAxis *axis, double center, double factor) {
         // qDebug()<<"zoomAxisToPoint";
+        if (center < axis->range().lower || center > axis->range().upper) {
+            return;
+        }
         QCPRange range = axis->range();
         double lower = center - (center - range.lower) * factor;
         double upper = center + (range.upper - center) * factor;
         axis->setRange(lower, upper);
     }
 
+    Q_INVOKABLE void BasePlot::appendBatch(const QString &name, const QVector<double> &x, const QVector<double> &y, bool alreadySorted)
+    {
+        if(m_graphs.contains(name)) {
+            m_graphs.value(name)->addDatas(x, y, alreadySorted);
+        }
+    }
+    Q_INVOKABLE void BasePlot::appendBatch(const QVector<double> &x, const QVector<double> &y)
+    {
+        for(auto it = m_graphs.begin(); it != m_graphs.end(); ++it)
+        {
+            it.value()->addDatas(x, y, true);
+        }
+    }
+    void BasePlot::updatePlot()
+    {
+        for(auto it = m_graphs.begin(); it != m_graphs.end(); ++it)
+        {
+            it.value()->clearData();
+        }
+        customPlot()->replot();
+    }
     void BasePlot::setMaxBufferPoints(int n) {
         m_maxBufferPoints = qMax(1, n);
         emit maxBufferChanged();

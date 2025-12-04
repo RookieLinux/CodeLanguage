@@ -38,11 +38,11 @@ namespace QmlQCustomPlot
         void set_backgroundColor(const QColor &value);
         void set_labelColor(const QColor &value);
         void set_baseColor(const QColor &value);
-        QVariant initialXRange() const { return QVariant::fromValue(m_initialXRange); }
+        [[nodiscard]] QVariant initialXRange() const { return QVariant::fromValue(m_initialXRange); }
         void setInitialXRange(const QVariant &v);
-        QVariant initialYRange() const { return QVariant::fromValue(m_initialYRange); }
+        [[nodiscard]] QVariant initialYRange() const { return QVariant::fromValue(m_initialYRange); }
         void setInitialYRange(const QVariant &v);
-        QVariantMap graphs() const;  //
+
         void paint(QPainter *painter) override;
         int maxBufferPoints() const { return m_maxBufferPoints; }
         int refreshMs() const { return m_refreshMs; }
@@ -59,10 +59,11 @@ namespace QmlQCustomPlot
         Q_INVOKABLE void zoomY(double py, double factor, bool isScale) const;
         Q_INVOKABLE void zoomXY(double px, double py, double factor, bool isScale) const;
         Q_INVOKABLE void resetRange() const;
+        Q_INVOKABLE void setRangeByPixels(double x1, double y1, double x2, double y2);
 
-        QCustomPlot *customPlot() const { return m_customPlot; }  //
-        const QMap<QString, Graph *> &graphsMap() const { return m_graphs; }
-        Graph* getGraph(const QString &key) const; //
+        [[nodiscard]] QCustomPlot *customPlot() const { return m_customPlot; }
+        [[nodiscard]] QVariantMap graphs() const;
+        [[nodiscard]] Graph* getGraph(const QString &key) const;
 
     protected:
         virtual void onChartViewReplot() { update(); }
@@ -81,8 +82,9 @@ namespace QmlQCustomPlot
         static void zoomAxisToPoint(QCPAxis *axis, double center, double factor);
 
     public slots:
-        virtual void appendBatch(const QVector<double> &x, const QVector<double> &y) = 0;
-        virtual void updatePlot() = 0;
+        Q_INVOKABLE virtual void appendBatch(const QString &name, const QVector<double> &x, const QVector<double> &y, bool alreadySorted);
+        Q_INVOKABLE virtual void appendBatch(const QVector<double> &x, const QVector<double> &y);
+        virtual void updatePlot();
         void setMaxBufferPoints(int n);
         void setRefreshMs(int ms);
         void setPaused(bool p);
@@ -104,7 +106,7 @@ namespace QmlQCustomPlot
         QTimer m_repaintTimer;
         QCPRange m_initialXRange;
         QCPRange m_initialYRange;
-        int m_maxBufferPoints = 24000;
+        int m_maxBufferPoints = 20000;
         int m_refreshMs = 5;
         bool m_paused = false;
     };

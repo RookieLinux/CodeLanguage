@@ -34,8 +34,8 @@ qt_add_executable(RealtimeCustomPlotDemo
 #    ${ALL_FILES}
         "3rdparty/qcustomplot/baseplot.cpp"
         "3rdparty/qcustomplot/baseplot.h"
-        "3rdparty/qcustomplot/realtimeplot.cpp"
-        "3rdparty/qcustomplot/realtimeplot.h"
+        "3rdparty/qcustomplot/RealTimePlot.cpp"
+        "3rdparty/qcustomplot/RealTimePlot.h"
         "3rdparty/qcustomplot/qcustomplot.cpp"
         "3rdparty/qcustomplot/qcustomplot.h"
         "3rdparty/qcustomplot/axis.cpp"
